@@ -115,12 +115,12 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
 
       {error && <p className="text-red-500 text-xs mt-1" style={{ fontFamily: F_SANS }}>{error}</p>}
 
-      <div className="flex items-start gap-2 mt-3">
+      {/* <div className="flex items-start gap-2 mt-3">
         <input type="checkbox" id="privacy-lead" required defaultChecked className="mt-0.5 shrink-0" style={{ accentColor: GOLD }} />
         <label htmlFor="privacy-lead" className="text-xs text-gray-500 leading-relaxed cursor-pointer" style={{ fontFamily: F_SANS }}>
           I agree to receive updates as per the <Link href="/privacy-policy" className="underline hover:text-[var(--color-gold)]" title="Read our Privacy Policy">Privacy Policy</Link>
         </label>
-      </div>
+      </div> */}
 
       <button type="submit" disabled={loading}
         className="btn-gold mt-4 w-full"

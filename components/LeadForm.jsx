@@ -100,7 +100,7 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
         className={inputClass} style={{ fontFamily: F_SANS }} />
       <input type="text" name="projectName" required placeholder="Project Name" value={formData.projectName} onChange={handleChange}
         className={inputClass} style={{ fontFamily: F_SANS }} />
-      <input type="text" name="sheetName" required placeholder="Sheet Name" value={formData.sheetName} onChange={handleChange}
+      <input type="text" name="sheetName" required placeholder="City Name" value={formData.sheetName} onChange={handleChange}
         className={inputClass} style={{ fontFamily: F_SANS }} />
       {/* <input type="text" name="city" required placeholder="City (e.g. Kolkata)" value={formData.city} onChange={handleChange}
         className={inputClass} style={{ fontFamily: F_SANS }} /> */}

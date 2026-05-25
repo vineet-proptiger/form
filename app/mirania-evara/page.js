@@ -36,7 +36,7 @@ export default function Home() {
       {/* <Footer /> */}
       {/* <EnquireModal isOpen={isOpen} setIsOpen={setIsOpen} /> */}
 
-      <div className="bg-white rounded-2xl shadow-lg p-6 w-full max-w-md">
+      <div className="bg-white rounded-2xl shadow-lg p-4 sm:p-6 w-full max-w-md">
         <h2 className="text-xl font-bold text-center mb-2" style={{ fontFamily: 'var(--font-jost), Montserrat, sans-serif' }}>
           Enquire Now
         </h2>

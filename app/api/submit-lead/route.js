@@ -37,10 +37,10 @@ export async function POST(request) {
 
     /* ── Required fields ── */
     let phone = get('phone').replace(/\D/g, '')
-    if (phone.length > 10) phone = phone.slice(-10)
+    const countryCode = get('country_code')
     const email = get('email')
 
-    if (phone.length > 0 && phone.length < 10) {
+    if (phone.length > 0 && phone.length < 6) {
       return Response.json({ status: false, msg: 'Invalid phone number' })
     }
 
@@ -88,7 +88,7 @@ export async function POST(request) {
       FirstName: firstName,
       LastName: lastName,
       Email: email,
-      Mobile: phone,
+      Mobile: `${countryCode}${phone}`,
       Comments: comments,
 
       utm_source: utmSource,
@@ -126,7 +126,7 @@ export async function POST(request) {
     const ptPayload = {
       name: `${firstName} ${lastName}`.trim(),
       email,
-      phone,
+      phone: `${countryCode}${phone}`,
       countryId: '1',
       source: utmSource,
 

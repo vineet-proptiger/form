@@ -1,5 +1,5 @@
 'use client'
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import Link from 'next/link'
 import PhoneInput from 'react-phone-input-2'
 import 'react-phone-input-2/lib/style.css'
@@ -21,6 +21,17 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
 
+  useEffect(() => {
+    if (!success) return
+    const t = setTimeout(() => {
+      setSuccess(false)
+      setFormData({ projectId: formData.projectId, projectName: formData.projectName, sheetName: formData.sheetName, city: '', cityId: '', fullname: '', email: '' })
+      setPhone('91')
+      setDialCode('91')
+    }, 4000)
+    return () => clearTimeout(t)
+  }, [success])
+
   const handleChange = (e) => {
     const { name, value } = e.target
     setFormData({ ...formData, [name]: value })
@@ -29,9 +40,8 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
   const handleSubmit = async (e) => {
     e.preventDefault()
     const localNumber = phone.slice(dialCode.length)
-    const isIndia = dialCode === '91'
-    if (!localNumber || (isIndia ? localNumber.length !== 10 : localNumber.length < 6)) {
-      setError(isIndia ? 'Please enter a valid 10-digit mobile number.' : 'Please enter a valid mobile number.')
+    if (!localNumber || localNumber.length < 6) {
+      setError('Please enter a valid mobile number.')
       return
     }
     setError(''); setLoading(true)

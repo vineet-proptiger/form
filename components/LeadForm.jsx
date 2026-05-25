@@ -83,6 +83,7 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
     </div>
   )
 
+  
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-1">
       <input type="text" name="projectId" required placeholder="Project ID" value={formData.projectId} onChange={handleChange}

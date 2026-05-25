@@ -31,8 +31,8 @@ const nephilm = localFont({
 })
 
 export const metadata = {
-  title: 'Mirania Evara | Luxury 3 & 4 BHK Residences on EM Bypass — Mukundapur, Kolkata',
-  description: 'Mirania Evara — Premium single-tower landmark on EM Bypass, Kolkata. 86 exclusive 3 & 4 BHK AC homes across B+G+18 floors with rooftop amenities, 50% open space & flexible payment plan.',
+  title: 'Lead Form',
+  description: 'Submit your details and our team will get in touch with you shortly.',
 }
 
 export default function RootLayout({ children }) {

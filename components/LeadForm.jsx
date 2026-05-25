@@ -12,6 +12,7 @@ const F_SANS = 'var(--font-sans), Open Sans, sans-serif'
 const inputClass = 'form-input mb-3 shadow-sm'
 const F_JOST = 'var(--font-jost), Montserrat, sans-serif'
 
+const CITIES = ['Ahmedabad','Bangalore','Chennai','Gurgaon','Hyderabad','Indore','Jaipur','Kolkata','Lucknow','Mumbai','Noida','Pune']
 
 const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
   const [formData, setFormData] = useState({ projectId: '', projectName: '', sheetName: '', city: '', cityId: '', fullname: '', email: '' })
@@ -20,6 +21,14 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
   const [loading, setLoading] = useState(false)
   const [success, setSuccess] = useState(false)
   const [error, setError] = useState('')
+  const [cityOpen, setCityOpen] = useState(false)
+
+  useEffect(() => {
+    if (!cityOpen) return
+    const close = (e) => { if (!e.target.closest('[data-city-dd]')) setCityOpen(false) }
+    document.addEventListener('mousedown', close)
+    return () => document.removeEventListener('mousedown', close)
+  }, [cityOpen])
 
   useEffect(() => {
     if (!success) return
@@ -39,6 +48,10 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault()
+    if (!formData.sheetName) {
+      setError('Please select a city.')
+      return
+    }
     const localNumber = phone.slice(dialCode.length)
     if (!localNumber || localNumber.length < 6) {
       setError('Please enter a valid mobile number.')
@@ -100,8 +113,28 @@ const LeadForm = ({ formName = 'Hero Form', btnText = 'Submit Details' }) => {
         className={inputClass} style={{ fontFamily: F_SANS }} />
       <input type="text" name="projectName" required placeholder="Project Name" value={formData.projectName} onChange={handleChange}
         className={inputClass} style={{ fontFamily: F_SANS }} />
-      <input type="text" name="sheetName" required placeholder="City Name" value={formData.sheetName} onChange={handleChange}
-        className={inputClass} style={{ fontFamily: F_SANS }} />
+      <div className="relative mb-3" data-city-dd>
+        <button type="button" onClick={() => setCityOpen(o => !o)}
+          className="form-input shadow-sm w-full flex items-center justify-between"
+          style={{ fontFamily: F_SANS, color: formData.sheetName ? 'var(--color-text-mid)' : '#9ca3af' }}>
+          <span>{formData.sheetName || 'Select City'}</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"
+            style={{ transition: 'transform 0.2s', transform: cityOpen ? 'rotate(180deg)' : 'rotate(0deg)', flexShrink: 0 }}>
+            <polyline points="6 9 12 15 18 9" />
+          </svg>
+        </button>
+        {cityOpen && (
+          <div className="absolute z-20 w-full bg-white border border-gray-200 rounded-lg shadow-lg mt-1 max-h-44 overflow-y-auto" data-city-dd>
+            {CITIES.map(city => (
+              <div key={city} onMouseDown={() => { setFormData(f => ({ ...f, sheetName: city })); setCityOpen(false) }}
+                className="px-4 py-2 cursor-pointer hover:bg-gray-50 text-sm"
+                style={{ fontFamily: F_SANS, color: '#374151', background: formData.sheetName === city ? '#f0f4fa' : '' }}>
+                {city}
+              </div>
+            ))}
+          </div>
+        )}
+      </div>
       {/* <input type="text" name="city" required placeholder="City (e.g. Kolkata)" value={formData.city} onChange={handleChange}
         className={inputClass} style={{ fontFamily: F_SANS }} /> */}
       {/* <input type="text" name="cityId" required placeholder="City ID (e.g. 1 for Kolkata)" value={formData.cityId} onChange={handleChange}

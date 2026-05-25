@@ -421,6 +421,10 @@
     color: #9ca3af;
   }
 
+  select.form-input option {
+    color: #374151;
+  }
+
   /* ══ GALLERY ══ */
   .gallery-item {
     overflow: hidden;

@@ -22,7 +22,7 @@ export default function Home() {
   // const [isOpen, setIsOpen] = useState(false)
 
   return (
-    <main className="min-h-screen bg-gray-50 flex items-center justify-center p-4">
+    <main className="min-h-screen bg-gray-50 flex items-start justify-center p-4 pt-10">
       {/* <Navbar setIsOpen={setIsOpen} /> */}
       {/* <Hero setIsOpen={setIsOpen} /> */}
       {/* <Overview setIsOpen={setIsOpen} /> */}
